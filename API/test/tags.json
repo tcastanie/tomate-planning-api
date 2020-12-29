@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "color": "#ff0000",
+        "title": "Nourriture",
+        "desc": "Kan l'appétit va tout va"
+    },
+    {
+        "id": 2,
+        "color": "#0000ff",
+        "title": "Vera Cruz",
+        "desc": "Pendant ce temps à Vera Cruz"
+    }
+]
