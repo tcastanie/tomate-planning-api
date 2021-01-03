@@ -1,4 +1,6 @@
 const express = require('express');
+const compression = require('compression');
+const helmet = require('helmet');
 const app = express();
 
 require('dotenv').config();
@@ -23,6 +25,8 @@ client.connect(err => {
 });
 
 app.use(express.json());
+app.use(compression());
+app.use(helmet());
 
 app.get('/events', async (req, res) => {
     try {
