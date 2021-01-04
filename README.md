@@ -1,11 +1,5 @@
-# 🍅 Tomate Planning
+# 🍅 Tomate Planning API
 
-## Serveur
 ```
-/API/
-```
-
-## Client
-```
-/front/
+node index.js
 ```
