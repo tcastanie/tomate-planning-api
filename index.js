@@ -17,16 +17,30 @@ const uri = `mongodb+srv://${USER}:${PASS}@${HOST}/${DBNAME}?retryWrites=true&w=
 
 const MongoClient = require('mongodb').MongoClient;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-let db;
+var db;
 client.connect(err => {
-    //console.log("Connected successfully to server");
-    db = client.db(DBNAME);
-    //client.close();
+    try {
+        console.log("Connected successfully to server");
+        db = client.db();
+    } catch (err) {
+        console.log("Connection error",err);
+        client.close();
+        throw err;
+    }
 });
 
 app.use(express.json());
 app.use(compression());
 app.use(helmet());
+
+app.get('/', (req, res) => {
+    try {
+        res.send("Tomate Planning API <3");
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+});
 
 app.get('/events', async (req, res) => {
     try {
@@ -36,7 +50,7 @@ app.get('/events', async (req, res) => {
         console.log(err);
         throw err;
     }
-})
+});
 
 app.get('/tags', async (req, res) => {
     try {
@@ -46,8 +60,8 @@ app.get('/tags', async (req, res) => {
         console.log(err);
         throw err;
     }
-})
+});
 
 app.listen(PORT, () => {
     console.log(`Tomate-planning server running on port ${PORT}`);
-})
+});
