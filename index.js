@@ -33,6 +33,7 @@ app.use(express.json());
 app.use(compression());
 app.use(helmet());
 
+//root
 app.get('/', (req, res) => {
     try {
         res.send("Tomate Planning API <3");
@@ -42,6 +43,14 @@ app.get('/', (req, res) => {
     }
 });
 
+//events
+/*
+GET /events
+GET /events/:id
+POST /events
+PUT /events/:id
+DELETE /events/:id
+*/
 app.get('/events', async (req, res) => {
     try {
         const docs = await db.collection('events').find({}).toArray();
@@ -52,6 +61,25 @@ app.get('/events', async (req, res) => {
     }
 });
 
+app.get('/events/:id', async (req, res) => {
+    const id = parseInt(req.params.id);
+    try {
+        const docs = await db.collection('events').find({id}).toArray();
+        res.status(200).json(docs);
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+});
+
+//tags
+/*
+GET /tags
+GET /tags/:id
+POST /tags
+PUT /tags/:id
+DELETE /tags/:id
+*/
 app.get('/tags', async (req, res) => {
     try {
         const docs = await db.collection('tags').find({}).toArray();
