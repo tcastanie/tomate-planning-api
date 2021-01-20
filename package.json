@@ -1,5 +1,5 @@
 {
-    "name": "tomate-planning",
+    "name": "tomate-planning-api",
     "version": "1.0.0",
     "description": "App to organize things",
     "engines": {
@@ -17,7 +17,7 @@
     "author": "tcastanie",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/tcastanie/tomate-planning/issues"
+        "url": "https://github.com/tcastanie/tomate-planning-api/issues"
     },
     "homepage": "https://github.com/tcastanie/tomate-planning-api#readme",
     "dependencies": {
