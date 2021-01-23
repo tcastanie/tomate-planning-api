@@ -2,6 +2,9 @@ module.exports = app => {
     const events = require("../controllers/event.controller.js");
     var router = require("express").Router();
 
+    // Create a new Event
+    router.post("/", events.create);
+
     // Retrieve all Events
     router.get("/", events.findAll);
 
@@ -10,9 +13,6 @@ module.exports = app => {
 
     // Retrieve a single Event with id
     router.get("/:id", events.findOne);
-
-    // Create a new Event
-    router.post("/", events.create);
 
     // Update an Event with id
     router.put("/:id", events.update);

@@ -1,15 +1,6 @@
 const db = require("../models");
 const Event = db.events;
 
-//events
-/*
-GET /events
-GET /events/:id
-POST /events
-PUT /events/:id
-DELETE /events/:id
-*/
-
 // Retrieve all Events from the database.
 exports.findAll = async (req, res) => {
     try {
@@ -47,10 +38,8 @@ exports.findOne = async (req, res) => {
 exports.findInc = async (req, res) => {
     const today = new Date();
     today.setHours(2, 0, 0, 0);
-    console.log(today);
     try {
         const docs = await Event.find({ dateEnd: { $gte: today } });
-        console.log(docs);
         if (docs.length <= 0) {
             res.status(404).send({ message: "Not found incoming Events" });
         } else {
@@ -81,8 +70,11 @@ exports.create = async (req, res) => {
         dateEnd: req.body.dateEnd
     });
     try {
-        const data = await Event.save(event);
-        res.status(201).send(data);
+        const data = await event.save(event);
+        res.status(201).send({
+            message: "New Event created",
+            data: data
+        });
     } catch (err) {
         res.status(500).send({
             message: err.message,
@@ -93,16 +85,49 @@ exports.create = async (req, res) => {
 };
 
 // Update an Event by the id in the request
-exports.update = (req, res) => {
+exports.update = async (req, res) => {
     if (!req.body) {
         res.status(400).send({ message: "Data to update can not be empty" });
         return;
     }
     const id = req.params.id;
-    //TODO
+    try {
+        const data = await Event.findByIdAndUpdate(id, req.body, { new: true });
+        if (!data) {
+            res.status(404).send({ message: `Cannot update Event with id=${id}. Maybe Event was not found` });
+        } else {
+            res.status(200).send({
+                message: "Event updated successfully",
+                data: data
+            });
+        }
+    } catch (err) {
+        res.status(500).send({
+            message: err.message,
+            desc: "Error updating Event with id " + id
+        });
+        throw err;
+    }
 };
 
 // Delete an Event with the specified id in the request
-exports.delete = (req, res) => {
-
+exports.delete = async (req, res) => {
+    const id = req.params.id;
+    try {
+        const data = await Event.findByIdAndRemove(id);
+        if (!data) {
+            res.status(404).send({ message: `Cannot delete Tutorial with id=${id}. Maybe Tutorial was not found` });
+        } else {
+            res.status(200).send({
+                message: "Event deleted successfully",
+                data: data
+            });
+        }
+    } catch (err) {
+        res.status(500).send({
+            message: err.message,
+            desc: "Could not Event with id " + id
+        });
+        throw err;
+    }
 };
