@@ -1,0 +1,17 @@
+// PUT event
+[
+    {
+        "idTag": "1",
+        "title": "prout",
+        "desc": "cet event est incroyable",
+        "place": "Montpellier",
+        "dateBegin": "2021-02-05T15:00:00.000Z",
+        "dateEnd": "2021-02-05T16:00:00.000Z"
+    },
+    // PUT tag
+    {
+        "title": "sport",
+        "color": "#F7C902",
+        "desc": "activités sportives"
+    }
+]
