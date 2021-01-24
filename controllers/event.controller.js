@@ -116,7 +116,7 @@ exports.delete = async (req, res) => {
     try {
         const data = await Event.findByIdAndRemove(id);
         if (!data) {
-            res.status(404).send({ message: `Cannot delete Tutorial with id=${id}. Maybe Tutorial was not found` });
+            res.status(404).send({ message: `Cannot delete Event with id=${id}. Maybe Event was not found` });
         } else {
             res.status(200).send({
                 message: "Event deleted successfully",
@@ -126,7 +126,7 @@ exports.delete = async (req, res) => {
     } catch (err) {
         res.status(500).send({
             message: err.message,
-            desc: "Could not Event with id " + id
+            desc: "Could not remove Event with id " + id
         });
         throw err;
     }
