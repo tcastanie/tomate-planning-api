@@ -92,7 +92,7 @@ exports.update = async (req, res) => {
     }
     const id = req.params.id;
     try {
-        const data = await Event.findByIdAndUpdate(id, req.body, { new: true, useFindAndModify: false });
+        const data = await Event.findByIdAndUpdate(id, req.body, { new: true });
         if (!data) {
             res.status(404).send({ message: `Cannot update Event with id=${id}. Maybe Event was not found` });
         } else {

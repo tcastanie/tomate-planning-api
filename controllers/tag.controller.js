@@ -68,7 +68,7 @@ exports.update = async (req, res) => {
     }
     const id = req.params.id;
     try {
-        const data = await Tag.findByIdAndUpdate(id, req.body, { new: true, useFindAndModify: false });
+        const data = await Tag.findByIdAndUpdate(id, req.body, { new: true });
         if (!data) {
             res.status(404).send({ message: `Cannot update Tag with id=${id}. Maybe Tag was not found` });
         } else {
